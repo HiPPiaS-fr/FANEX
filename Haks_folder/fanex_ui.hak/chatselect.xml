@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8">
+
+<UIScene name="SCREEN_CHATSELECT" x=20 y=128 width=280 height=242 fadeout="0.3" fadein="0.3" draggable=true
+	priority="SCENE_SCRIPT" scriptloadable="true"
+	OnAdd=UIObject_Misc_ExecuteServerScript("gui_hpps_playerchat","Init") idleexpiretime="1.0f" />
+
+	<!-- Close Button -->
+	<UIButton name="CloseButton" x=250 y=2 width=27 height=27 style="STYLE_CLOSE_BUTTON" 
+		OnLeftClick=UIButton_Input_ScreenClose()>
+	</UIButton>
+	
+	
+	<!-- Radio Buttons -->
+	<UIButton name="PLAYER_SELECT" x=10 y=10 width=13 height=13 MouseDownSFX="gui_m_down" MouseUpSFX="gui_button" buttontype=radio groupid=1 groupmemberid=1 disabledcolor="LightSlateGray"
+			  OnLeftClick=UIObject_Misc_ExecuteServerScript("gui_hpps_playerchat","Select_PlayerOrChar","Player")>
+		    <UIFrame state=up		fill="b_radio_off.tga" />
+		    <UIFrame state=down		fill="b_radio_on.tga" />
+		    <UIFrame state=focused	fill="b_radio_on.tga" />
+		    <UIFrame state=hilited	fill="b_radio_on.tga" />
+		    <UIFrame state=hifocus	fill="b_radio_on.tga" />
+		    <UIFrame state=disabled	fill="b_radio_off.tga" />	
+	</UIButton>
+	<UIText name="Descr" text="Player" buttonoverlay=true uppercase=false x=30 y=8 width=110 height=16 valign=middle fontfamily="Default" style="1" color=C1AB89 />
+	
+	<UIButton name="CHAR_SELECT" x=150 y=10 width=13 height=13 MouseDownSFX="gui_m_down" MouseUpSFX="gui_button" buttontype=radio groupid=1 groupmemberid=2 disabledcolor="LightSlateGray"
+			  OnLeftClick=UIObject_Misc_ExecuteServerScript("gui_hpps_playerchat","Select_PlayerOrChar","Char")>
+		    <UIFrame state=up		fill="b_radio_off.tga" />
+		    <UIFrame state=down		fill="b_radio_on.tga" />
+		    <UIFrame state=focused	fill="b_radio_on.tga" />
+		    <UIFrame state=hilited	fill="b_radio_on.tga" />
+		    <UIFrame state=hifocus	fill="b_radio_on.tga" />
+		    <UIFrame state=disabled	fill="b_radio_off.tga" />	
+	</UIButton>
+	<UIText name="Descr" text="Character" buttonoverlay=true uppercase=false x=170 y=8 width=110 height=16 valign=middle fontfamily="Default" style="1" color=C1AB89 />
+	
+	<!-- Normal Buttons -->
+	<UIText name="Descr" text="Group" buttonoverlay=true uppercase=false x=10 y=28 width=80 height=16 valign=middle align=center fontfamily="Default" style="1" color=C1AB89 />
+	<UIButton name="SEND_GROUP" x=10 y=27 width=80 height=20 MouseDownSFX="gui_m_down" MouseUpSFX="gui_button" disabledcolor="LightSlateGray" style="STYLE_SMALL_BUTTON" color=C1AB89
+			  OnLeftClick=UIObject_Misc_ExecuteServerScript("gui_hpps_playerchat","Send_Group",local:0)>
+	</UIButton>
+	
+	<UIText name="Descr" text="DM" buttonoverlay=true uppercase=false x=100 y=28 width=80 height=16 valign=middle align=center fontfamily="Default" style="1" color=C1AB89 />
+	<UIButton name="SEND_GROUP" x=100 y=27 width=80 height=20 MouseDownSFX="gui_m_down" MouseUpSFX="gui_button" disabledcolor="LightSlateGray" style="STYLE_SMALL_BUTTON" color=C1AB89
+			  OnLeftClick=UIObject_Misc_ExecuteServerScript("gui_hpps_playerchat","Send_DM",local:0)>
+	</UIButton>
+	
+	<UIText name="Descr" text="All" buttonoverlay=true uppercase=false x=190 y=28 width=80 height=16 valign=middle align=center fontfamily="Default" style="1" color=C1AB89 />
+	<UIButton name="SEND_GROUP" x=190 y=27 width=80 height=20 MouseDownSFX="gui_m_down" MouseUpSFX="gui_button" disabledcolor="LightSlateGray" style="STYLE_SMALL_BUTTON" color=C1AB89
+			  OnLeftClick=UIObject_Misc_ExecuteServerScript("gui_hpps_playerchat","Send_All",local:0)>
+	</UIButton>
+	
+	<UIPane name="SendTexte" x="3" y="198" width="272" height="38" capturemouseclicks="false">
+		<UIListBox name="INPUT_LISTBOX" x="0" y="0" width="PARENT_WIDTH" height="PARENT_HEIGHT" showpartialchild="true"
+		unequalcontrols="true" scrollsegmentsize="30" hidescrollbarwhennotneeded="true" >
+			<UIText name="Texte" allowspace="true" width="PARENT_WIDTH" height="DYNAMIC" align="left" valign="top" 
+			fontfamily="International" multiline="true" returnrestricted="true" editable="true" selectable="true"
+			maxlength="255" update=true OnUpdate=UIObject_Misc_SetLocalVarString(local:0)
+			OnToolTip='UIObject_Tooltip_DisplayTooltipString("Commenter votre Emote",OBJECT_X,OBJECT_Y,SCREEN_TOOLTIP_2,ALIGN_NONE,ALIGN_NONE,0,0,ALIGN_LEFT)'/>
+		</UIListBox>
+		<UIIcon name="Texte_bg" x="0" y="0" width="PARENT_WIDTH" height="PARENT_HEIGHT" img="fx_white.tga" color="2F000000" alpha="0.6" />
+	</UIPane>
+	
+	<!-- Player List Listbox -->
+	<UIListbox name="PLAYER_LIST" x="5" y="49" width="270" height="150"  
+		showpartialchild=false scrollbaronright=true selectonleftclick="true"
+		update=true OnUpdate=UIObject_Misc_ExecuteServerScript("gui_hpps_playerchat","Update") updaterate=15.0 >
+
+		<!--UIPane name="PlayerPane" x=0 y=0 width=722 height=32 prototype=true tupple=true -->
+		<UIButton name="BUTTON_PLAYER" x=12 y=0 height=24 width=180 prototype=true color="AAACCC" tupple='true'
+				  valign=middle align=left fontfamily="Body_Font" style="STYLE_LIST_BUTTON" 
+				  OnLeftClick0=UIObject_Misc_ExecuteServerScript("gui_hpps_playerchat","Find_Dest",listboxtext:PLAYER_LIST.NAME)
+				  OnLeftClick1=UIObject_Misc_ExecuteServerScript("gui_hpps_playerchat","Send_Message",local:0)>
+
+			<!--<UIText name="PC_NAME" x=5 y=0 height=16 width=290
+				valign=middle align=left fontfamily="Body_Font" style=2 />-->
+			<UIText name="NAME" x=5 y=16 height=16 width=290 color="AAACCC"
+					valign=middle align=left fontfamily="Body_Font" style=1 />
+			
+		</UIButton>
+		<!--/UIPane>-->
+		<UIScrollBar name="SB" style="STYLE_SB_THIN" hidescrollbarwhennotneeded=true></UIScrollBar>	
+	</UIListbox>
+	
+	<!-- Background -->
+<UIIcon img="stats_container_03.tga" width=PARENT_WIDTH height=PARENT_HEIGHT/>
