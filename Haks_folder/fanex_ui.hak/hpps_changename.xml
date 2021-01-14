@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<UIScene name="hpps_changename" x=0 y="ALIGN_CENTER" width=359 height=250 draggable="true" fadeout="0.3" fadein="0.3" backoutkey="true" priority="SCENE_SCRIPT" scriptloadable="true"
+update="True" modal=false OnAdd=UIObject_Misc_ExecuteServerScript("gui_hpps_changename","Init")/>
+		
+
+<!-- Close Button -->
+	<UIButton name="CloseButton" x=324 y=8 style="STYLE_CLOSE_BUTTON" 
+		OnLeftClick=UIButton_Input_ScreenClose()>
+	</UIButton>
+	
+<!-- Title -->
+<UIText name="Title" text="Description"  x=ALIGN_CENTER y="7" width=230 height=30 align=center valign=middle fontfamily="Title_Font" style="2" multiline=false />
+
+<!-- Rename Pane -->
+<UIPane name="pnlContentPane" x=ALIGN_CENTER y=40 width=333 height="PARENT_HEIGHT" capturemouseclicks="true" ignoreevents="false" >
+
+		<UIText name="TrueName" text="<i>Nom Original</i>" x=ALIGN_CENTER y="5" width=230 height=20 align=center valign=middle fontfamily="Title_Font" style="2" multiline=false />
+		
+		<!-- First Name -->
+		<UIText name="lblFirstName" text="Nouveau Prénom : " fontfamily="Body_Font" style=4 x=ALIGN_CENTER y=50 width=250 height=18 valign="middle" align="left" selectable=false editable=false multiline=false />	
+		<UIText name="txtFirstName" fontfamily="Body_Font" style=4 x=ALIGN_CENTER y=75 width=250 height=18 valign="middle" align="left" highlightcolor=FFFFFF  allowspace=true allowpunc=true selectable=true editable=true maxlength=32 multiline=false prevcontrol="btnClose" nextcontrol="txtLastName" update=true OnUpdate=UIObject_Misc_SetLocalVarString(local:0) />
+		<UIFrame name="frmFirstName" x=ALIGN_CENTER y=73 width=254 height=22 topleft="tp_frame_tl.tga" topright="tp_frame_tr.tga" bottomleft="tp_frame_bl.tga" bottomright="tp_frame_BR.tga" top="tp_frame_t.tga" bottom="tp_frame_b.tga"left="tp_frame_l.tga" right="tp_frame_r.tga" fillstyle="stretch" fill="tp_frame_bg.tga" border=5 />
+
+		<!-- Last Name -->
+		<UIText name="lblLastName" text="Nouveau Nom : " fontfamily="Body_Font" style=4 x=ALIGN_CENTER y=100 width=250 height=18 valign="middle" align="left" selectable=true editable=false multiline=false />	
+		<UIText name="txtLastName" text="" fontfamily="Body_Font" style=4 x=ALIGN_CENTER y=123 width=250 height=18 valign="middle" align="left" highlightcolor=FFFFFF  allowspace=true allowpunc=true selectable=true editable=true maxlength=32 multiline=false prevcontrol="txtFirstName" nextcontrol="btnChangeName" update=true OnUpdate=UIObject_Misc_SetLocalVarString(local:1) />	
+		<UIFrame name="frmLastName" x=ALIGN_CENTER y=121 width=254 height=22 topleft="tp_frame_tl.tga" topright="tp_frame_tr.tga" bottomleft="tp_frame_bl.tga" bottomright="tp_frame_BR.tga" top="tp_frame_t.tga" bottom="tp_frame_b.tga" left="tp_frame_l.tga" right="tp_frame_r.tga" fillstyle="stretch" fill="tp_frame_bg.tga" border=5 />
+
+		<!-- Ok Button -->
+		<UIButton name="btnOk" text="Ok" x=25 y=170 style="STYLE_SMALL_BUTTON" OnLeftClick=UIObject_Misc_ExecuteServerScript("gui_hpps_changename","NewName",local:0,local:1) >
+		</UIButton>
+		
+		<!-- Previous Reset Button -->
+		<UIButton name="btnPreReset" text="Nom original" x=185 y=170 style="STYLE_SMALL_BUTTON" OnLeftClick=UIObject_Misc_ExecuteServerScript("gui_hpps_changename","Reset") >
+		</UIButton>
+
+</UIPane>
+
+<!-- Background Image -->
+	<UIIcon name="BACKGROUND_TOP" img="store_top_bg.tga" x=10 y=8 width=340 height=90 />
+	<UIIcon name="BACKGROUND_BOTTOM" img="store_bottom_bg.tga" x=10 y=387 width=340 height=89 />
+	<UIIcon name="BACKGROUND" img="store_bg.tga" x=10 y=8 width=340 height=339 />
+	<UIFrame x=0 y=0 width=PARENT_WIDTH height=PARENT_HEIGHT topleft="frame1_tl.tga" topright="frame1_tr.tga" bottomleft="frame1_bl.tga"
+		bottomright="frame1_BR.tga" top="frame1_t.tga" bottom="frame1_b.tga"
+		left="frame1_l.tga" right="frame1_r.tga" border=32 />	

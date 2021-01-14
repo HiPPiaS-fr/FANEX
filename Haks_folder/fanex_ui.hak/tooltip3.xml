@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8">
+
+<UIScene name="SCREEN_TOOLTIP" height=200 width=300 x=0 y=450 update=true OnUpdate=UIScene_OnUpdate_UpdateTooltip() 
+OnCreate=UIScene_OnCreate_SetupTooltip(400,0,0,0,0,0)
+OnRemove=UIScene_OnRemove_ResetTooltip() 
+ignoreevents=true capturemouseclicks=false capturemouseevents=false priority="SCENE_INGAME_TARGET"/>
+		
+	<!-- Fetch the Tooltip -->
+	<UIText name=tooltiptext align=center valign=middle x=10 y=10 width=PARENT_WIDTH height=DYNAMIC color=e8e8e8 
+	ignoreevents=true capturemouseclicks=false capturemouseevents=false hidden=true
+	fontfamily="Default" />
+	
+	<!-- Background Image -->
+	<UIFrame name=tooltipbackground x=0 y=0 width=PARENT_WIDTH height=PARENT_HEIGHT topleft="tp_frame_tl.tga" topright="tp_frame_tr.tga" bottomleft="tp_frame_bl.tga"
+		bottomright="tp_frame_BR.tga" top="tp_frame_t.tga" bottom="tp_frame_b.tga"
+		left="tp_frame_l.tga" right="tp_frame_r.tga" fillstyle="stretch" fill="tp_frame_bg.tga"
+		border=5 
+		ignoreevents=true capturemouseclicks=false capturemouseevents=false hidden=true />
+
