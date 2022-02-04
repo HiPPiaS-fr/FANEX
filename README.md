@@ -21,6 +21,12 @@ How it works ?
     A row and a column with same format as label are created in an sql database.
     Players will then write down the names they know of each and this will fill in the fields of the table.
 
+Chating is essential
+
+    The OnChat script sends all messages in server mode without specifying a sender. The real name is replaced known by the listener using the FANEX script.
+    The ability to speak over x meters or an area has been added.
+    MPChat has been redesigned to choose whether to send an HRP message to a player or an RP message to their character.
+
 The real difficulty of this experience is not to create and fill this table, or even to retrieve the data from it, but to apply it to all UIs which are all designed to display real technical names of the characters.
 
 It is this experience that I will try to share with you as regularly as possible.
