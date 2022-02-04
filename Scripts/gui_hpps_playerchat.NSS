@@ -16,6 +16,7 @@ void main(string sAction, string sSubAction)
 	if(sAction=="Init")
 	{
 		SetLocalString(oPC, "PlayerChatSelect", "Player");	// Affiche la liste de joueurs par défaut.
+
 		CreateList(oPC, sScreenName, sListBox);
 	}
 	else if (sAction == "Update")
@@ -30,6 +31,7 @@ void main(string sAction, string sSubAction)
 		CreateList(oPC, sScreenName, sListBox);
 	}
 	else if (sAction == "Find_Dest") // Récupère le nom personnage ou du joueur lors de la génération de la liste.
+
 	{
 				
 		object oList = GetFirstPC();

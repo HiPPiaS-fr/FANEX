@@ -1,7 +1,9 @@
+
 #include "fanex_include"
 
 object oPC = OBJECT_SELF;
 //string sScreenName = "MP_CHAT1";
+
 
 void main(string sAction, string sSubAction)
 {	
@@ -18,4 +20,3 @@ void main(string sAction, string sSubAction)
 		SetLocalFloat(oPC, "fTalk_Distance", StringToFloat(sSubAction));
 		SendMessageToPC(oPC, "Distance d'écoute réglée à " + sSubAction);
 	}
-}
