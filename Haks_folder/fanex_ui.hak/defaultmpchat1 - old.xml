@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8">
 
 <UIScene name="SCREEN_MESSAGE_MP_1" width=398 height=138 x=112 y=575 minwidth=314 minheight=118 capturemouseclicks="false" priority="SCENE_INGAME"
-	dragresizable="true" dragresize_x=0 dragresize_y=20 dragresizeborder="6" capturemouseevents="true" idleexpiretime="0.1"
-	draggable="true" dragregion_x=0 dragregion_y=0 dragregion_width=100 dragregion_height=20/>
+	dragresizable="true" dragresize_x=0 dragresize_y=20 dragresizeborder="6" capturemouseevents="true" scriptloadable="true" backoutkey="true"
+	draggable="true" dragregion_x=0 dragregion_y=0 dragregion_width=100 dragregion_height=20 update="true" />
 
 	<UIPane name="DRAG_REGION" x=0 y=0 width=100 height=20 alpha="1.0" fadealpha="0.0" update=true capturemouseclicks=false
 		OnUpdate=UIObject_OnUpdate_FadeAlpha("0.25")
@@ -80,16 +80,28 @@
 	</UIPane>
 
 	<!-- Chat Listbox -->
-	<UIListBox name="messagelistbox" x=24 y=26 xPadding=5 yPadding=2 showpartialchild="true" width=375 height=70
-		OnResize=UIListBox_OnResize_ScrollToBottom()
-		OnRadialRequest=UIObject_OnRadial_DisplayQuickchatRadial()
+	<UIListBox name="messagelistboxhystory" x=24 y=26 xPadding=5 yPadding=2 showpartialchild="true" width=375 height=13
+		OnRadialRequest=UIObject_OnRadial_DisplayQuickchatRadial() update="true"
 		scrollbaronright="false" unequalcontrols="true" scrollsegmentsize="16" hidescrollbarwhennotneeded="true" snaptobottom="true"
 		scaleheighttoparent="true" scalewidthtoparent="true" capturemouseclicks="false" >
 
-		<UIText name="repliestext" width="PARENT_WIDTH" height="DYNAMIC" color="ffc8c0" highlightcolor="FFFFFF" sizetofit="true" align="left" 
-			prototype="true" fontfamily="Default" capturemouseclicks=false capturemouseevents=true />
+		<UIButton name="MsgPane" x=0 y=0 width="PARENT_WIDTH" height="DYNAMIC" prototype=true >
+			<UIText name="repliestext" width="PARENT_WIDTH" height="DYNAMIC" color="ffc8c0" highlightcolor="FFFFFF" sizetofit="true" align="left" 
+					multiline="true" prototype="true" fontfamily="Default" capturemouseclicks=false capturemouseevents=true/>
+			<UIIcon name="messagebackground" x="0" y="20" img="fx_white.tga" width=PARENT_WIDTH height=PARENT_HEIGHT color="2F000000" alpha="1" />
+		</UIButton>
+		<UIScrollBar name="SB1" style="STYLE_SB_ULTRA_THIN"></UIScrollBar>
+	</UIListBox>
+	
+	<UIListBox name="messagelistbox" x=24 y=26 xPadding=5 yPadding=2 showpartialchild="true" width=375 height=13
+		OnRadialRequest=UIObject_OnRadial_DisplayQuickchatRadial() OnUpdate=UIListBox_OnResize_ScrollToBottom()
+		scrollbaronright="false" unequalcontrols="true" scrollsegmentsize="16" hidescrollbarwhennotneeded="true" snaptobottom="true"
+		scaleheighttoparent="true" scalewidthtoparent="true" capturemouseclicks="false" >
 
-		<UIScrollBar name="SB" style="STYLE_SB_ULTRA_THIN"></UIScrollBar>
+		<UIButton name="MsgPane" x=0 y=0 width="PARENT_WIDTH" height="DYNAMIC" prototype=true >
+			<UIText name="repliestext" width="PARENT_WIDTH" height="DYNAMIC" color="ffc8c0" highlightcolor="FFFFFF" sizetofit="true" align="left" 
+					multiline="true" prototype="true" fontfamily="Default" capturemouseclicks=false capturemouseevents=true/>
+		</UIButton>
 	</UIListBox>
 
 	<!-- Input Listbox -->
@@ -100,11 +112,11 @@
 			<!-- WAS filter="alphanumeric" and not allowspace="true" -->
 			<UIText name="inputbox" allowspace="true" width="PARENT_WIDTH" height="DYNAMIC" align="left" valign="top" 
 			fontfamily="International" multiline="true" returnrestricted="true" editable="true" selectable="true"
-			maxlength="255" OnReturn="UIText_OnReturn_ParseChatInput()" 
-			update=true OnUpdate="UIText_OnUpdate_ParseChatInput()"
-			/>
+			maxlength="255" update="true"
+			OnUpdate=UIObject_Misc_SetLocalVarString(local:0)
+			OnReturn=UIObject_Misc_ExecuteServerScript("gui_hpps_mpchat","Send",local:0)/>
 
-			<UIScrollBar name="SB" style="STYLE_SB_ULTRA_THIN"></UIScrollBar>
+			<UIScrollBar name="SB2" style="STYLE_SB_THIN"></UIScrollBar>
 		</UIListBox>
 		<UIIcon name="inputbg" x="0" y="0" width="PARENT_WIDTH" height="PARENT_HEIGHT" img="fx_white.tga" color="2F000000" alpha="0.75" />
 	</UIPane>
